@@ -23,11 +23,12 @@ def start(update, context):
         logging.error(str(e))
 
 def exec_command(update, context):
-    command_text = update.message.text
-    if(update.effective_chat.id in permitted_users):
-        if(command_text[0] == "/"):
+    if (update.effective_chat.id in permitted_users):
+        command_text = update.message.text
+        if (command_text[0] == "/"):
             if command_text == "/screenshot":
-                filename = screenshot_location + "screenshot_%s.png" % str(update.effective_chat.id)
+                filename = f"{screenshot_location}screenshot_{str(update.effective_chat.id)}.png"
+
                 logging.info("Sending screenshot")
                 im = ImageGrab.grab()
                 im.save(filename)
